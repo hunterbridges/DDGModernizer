@@ -14,20 +14,9 @@ namespace DDGModernizer
 {
     public partial class Dashboard : Form
     {
-        // Enums
-
-        enum DDGVersion
-        {
-            UNKNOWN,
-            PRO_2,
-            SHINKANSEN,
-            FINAL
-        }
-
         // Entity Vars
 
         DDGVersion currentVersion = DDGVersion.UNKNOWN;
-        string inputExe = "";
 
         Dictionary<DDGVersion, string> regPaths = new Dictionary<DDGVersion, string>();
 
@@ -44,6 +33,8 @@ namespace DDGModernizer
 
         void ConfigRegPaths()
         {
+            // Legacy windows charset fun...
+
             regPaths[DDGVersion.PRO_2] = "Software\\TAITO\\�d�Ԃłf�n�I�v���t�F�b�V���i���Q";
             regPaths[DDGVersion.SHINKANSEN] = "Software\\TAITO\\�d�Ԃłf�n�I�V���� �R�z�V������";
             regPaths[DDGVersion.FINAL] = "Software\\TAITO\\�d�Ԃłf�n�I�e�h�m�`�k";
@@ -152,6 +143,8 @@ namespace DDGModernizer
             }
 
             Aspect_InitForVersion(currentVersion);
+            DrawDistance_InitForVersion(currentVersion);
+
             ValidateGoButton();
         }
 
@@ -221,6 +214,19 @@ namespace DDGModernizer
             enabled &= Directory.Exists(textBox_GameFolder.Text);
 
             button_Go.Enabled = enabled;
+        }
+
+        private void button_Go_Click(object sender, EventArgs e)
+        {
+            Patcher patcher = new Patcher(currentVersion);
+
+            patcher.SetModuleParam(Patcher.MODULE_KEY_ASPECT, "AspectX", (float)upDown_XAspect.Value);
+            patcher.SetModuleParam(Patcher.MODULE_KEY_ASPECT, "AspectY", (float)upDown_YAspect.Value);
+            patcher.SetModuleParam(Patcher.MODULE_KEY_ASPECT, "WinZoom", (float)upDown_WinZoom.Value);
+
+            patcher.SetModuleParam(Patcher.MODULE_KEY_DRAW_DISTANCE, "RendPow", (float)upDown_RendPow.Value);
+
+            patcher.PatchAndRun();
         }
 
         #endregion

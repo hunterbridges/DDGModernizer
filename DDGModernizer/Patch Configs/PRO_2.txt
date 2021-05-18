@@ -1,0 +1,34 @@
+﻿[Aspect]
+<AspectX,float,4,1.0>
+<AspectY,float,4,1.0>
+<WinZoom,float,4,640.0>
+$13a46, 68 00 00 00 3F 68 00 00 80 3F , 68 (AspectY) 68 (AspectX)
+$58a48, 68 00 00 00 3F 68 00 00 80 3F , 68 (AspectY) 68 (AspectX)
+$5a69b, 68 00 00 00 3F 68 00 00 80 3F , 68 (AspectY) 68 (AspectX)
+$5a81f, 68 00 00 00 3F 68 00 00 80 3F , 68 (AspectY) 68 (AspectX)
+$5c247, A3 F0 B7 59 00 , EB 14 90 90 90
+$19b7f0, 00 00 20 44 , (WinZoom)
+$19b800, 00 00 20 44 , (WinZoom)
+$19b810, 00 00 20 44 , (WinZoom)
+$19b820, 00 00 20 44 , (WinZoom)
+
+[DrawDistance]
+<RendPow,float,4,0.6>
+<OkiDistArg,float,4,0.4>
+<OkiLimit,float,4,660.0>
+<RailLimit,float,4,300.0>
+<WallLimit,float,4,350.0>
+<DispTrain,float,4,45000.0>
+$4c16e, 75 1E, EB 6A
+$4c1e6, 83 C4 04, 83 C4 00
+$199174, 66 66 66 3F, (RendPow)
+$1990f0, CD CC CC 3E, (OkiDistArg)
+;OkiLimit
+$b3048, 00 00 25 44, (OkiLimit)
+;RailLimit
+$4bd40, D9 05 60 2D 4B 00 , D9 05 84 30 4B 00
+$b3084, 00 00 00 00, (RailLimit)
+;WallLimit/SubRail
+$b3044, 00 00 AF 43, (WallLimit)
+;__disptrain
+$a238c, 00 C8 2F 47, (DispTrain)

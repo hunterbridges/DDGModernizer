@@ -482,6 +482,7 @@ namespace DDGModernizer
             this.button_Go.TabIndex = 25;
             this.button_Go.Text = "GO!!";
             this.button_Go.UseVisualStyleBackColor = true;
+            this.button_Go.Click += new System.EventHandler(this.button_Go_Click);
             // 
             // Dashboard
             // 
