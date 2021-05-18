@@ -42,7 +42,7 @@ namespace DDGModernizer
 
         bool IsVersionSupported(DDGVersion version)
         {
-            return version == DDGVersion.PRO_2;
+            return version != DDGVersion.UNKNOWN;
         }
 
         DDGVersion DetectVersion(string path)
