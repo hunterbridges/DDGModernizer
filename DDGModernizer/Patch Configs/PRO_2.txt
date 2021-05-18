@@ -2,10 +2,15 @@
 <AspectX,float,4,1.0>
 <AspectY,float,4,1.0>
 <WinZoom,float,4,640.0>
+;ExecViewCom
 $13a46, 68 00 00 00 3F 68 00 00 80 3F , 68 (AspectY) 68 (AspectX)
-$58a48, 68 00 00 00 3F 68 00 00 80 3F , 68 (AspectY) 68 (AspectX)
+;WinInit
+$5a690, 68 00 00 20 44 , 68 (WinZoom)
 $5a69b, 68 00 00 00 3F 68 00 00 80 3F , 68 (AspectY) 68 (AspectX)
+;WinAlloc
+$5a814, 68 00 00 20 44 , 68 (WinZoom)
 $5a81f, 68 00 00 00 3F 68 00 00 80 3F , 68 (AspectY) 68 (AspectX)
+;Other
 $5c247, A3 F0 B7 59 00 , EB 14 90 90 90
 $19b7f0, 00 00 20 44 , (WinZoom)
 $19b800, 00 00 20 44 , (WinZoom)
@@ -32,3 +37,6 @@ $b3084, 00 00 00 00, (RailLimit)
 $b3044, 00 00 AF 43, (WallLimit)
 ;__disptrain
 $a238c, 00 C8 2F 47, (DispTrain)
+;Fog
+$14ed70, 00 00 7A 43 00 00 48 43 , 00 00 7A 53 00 00 48 53
+$14fafc, 00 00 7A 43 00 00 48 43 , 00 00 7A 53 00 00 48 53

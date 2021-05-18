@@ -220,13 +220,15 @@ namespace DDGModernizer
         {
             Patcher patcher = new Patcher(currentVersion);
 
-            patcher.SetModuleParam(Patcher.MODULE_KEY_ASPECT, "AspectX", (float)upDown_XAspect.Value);
-            patcher.SetModuleParam(Patcher.MODULE_KEY_ASPECT, "AspectY", (float)upDown_YAspect.Value);
-            patcher.SetModuleParam(Patcher.MODULE_KEY_ASPECT, "WinZoom", (float)upDown_WinZoom.Value);
+            patcher.SetModuleEnabled(Patcher.MODULE_KEY_ASPECT, checkBox_AspectEnable.Checked);
+            patcher.SetModuleArg(Patcher.MODULE_KEY_ASPECT, "AspectX", (float)upDown_XAspect.Value);
+            patcher.SetModuleArg(Patcher.MODULE_KEY_ASPECT, "AspectY", (float)upDown_YAspect.Value);
+            patcher.SetModuleArg(Patcher.MODULE_KEY_ASPECT, "WinZoom", (float)upDown_WinZoom.Value);
 
-            patcher.SetModuleParam(Patcher.MODULE_KEY_DRAW_DISTANCE, "RendPow", (float)upDown_RendPow.Value);
+            patcher.SetModuleEnabled(Patcher.MODULE_KEY_DRAW_DISTANCE, checkBox_DrawDistEnable.Checked);
+            patcher.SetModuleArg(Patcher.MODULE_KEY_DRAW_DISTANCE, "RendPow", (float)upDown_RendPow.Value);
 
-            patcher.PatchAndRun();
+            patcher.PatchAndRun(textBox_EXEPath.Text, textBox_GameFolder.Text);
         }
 
         #endregion

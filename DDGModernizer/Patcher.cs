@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace DDGModernizer
 {
@@ -16,6 +17,38 @@ namespace DDGModernizer
         public int size;
         public object defaultVal;
         public object userVal;
+
+        public object CurrentValue
+        {
+            get
+            {
+                if (userVal != null)
+                    return userVal;
+
+                return defaultVal;
+            }
+        }
+
+        public byte[] ValueBytes
+        {
+            get
+            {
+                if (type == typeof(string))
+                    return Encoding.UTF8.GetBytes((string)CurrentValue).Take(size).ToArray();
+                else if (type == typeof(float))
+                    return BitConverter.GetBytes((float)CurrentValue).Take(size).ToArray();
+                else if (type == typeof(char))
+                    return BitConverter.GetBytes((char)CurrentValue).Take(size).ToArray();
+                else if (type == typeof(short))
+                    return BitConverter.GetBytes((short)CurrentValue).Take(size).ToArray();
+                else if (type == typeof(int))
+                    return BitConverter.GetBytes((int)CurrentValue).Take(size).ToArray();
+                else if (type == typeof(long))
+                    return BitConverter.GetBytes((long)CurrentValue).Take(size).ToArray();
+
+                return new byte[size];
+            }
+        }
 
         public void ConfigureType(string typeName, string typeSize)
         {
@@ -79,7 +112,7 @@ namespace DDGModernizer
 
     class PatcherInjection
     {
-        public uint offset;
+        public long offset;
         public string searchPattern;
         public string injectPattern;
     }
@@ -87,6 +120,7 @@ namespace DDGModernizer
     class PatcherModule
     {
         public string name;
+        public bool enabled = false;
 
         public List<PatcherArg> argList = new List<PatcherArg>();
         public List<PatcherInjection> injectionList = new List<PatcherInjection>();
@@ -127,23 +161,6 @@ namespace DDGModernizer
             mVersion = version;
 
             ParsePatchConfig();
-        }
-
-        public void SetModuleParam(string moduleName, string paramName, object value)
-        {
-            if (moduleMap.ContainsKey(moduleName) == false)
-                return;
-
-            PatcherModule module = moduleMap[moduleName];
-            if (module.argMap.ContainsKey(paramName) == false)
-                return;
-
-            module.argMap[paramName].SetUserVal(value);
-        }
-
-        public void PatchAndRun()
-        {
-
         }
 
         #region Patch Config
@@ -277,6 +294,122 @@ namespace DDGModernizer
                         }
                 }
             }
+        }
+
+        #endregion
+
+        #region Arguments
+
+        public void SetModuleEnabled(string moduleName, bool enabled)
+        {
+            if (moduleMap.ContainsKey(moduleName) == false)
+                return;
+
+            PatcherModule module = moduleMap[moduleName];
+            module.enabled = enabled;
+        }
+
+        public void SetModuleArg(string moduleName, string argName, object value)
+        {
+            if (moduleMap.ContainsKey(moduleName) == false)
+                return;
+
+            PatcherModule module = moduleMap[moduleName];
+            if (module.argMap.ContainsKey(argName) == false)
+                return;
+
+            module.argMap[argName].SetUserVal(value);
+        }
+
+        #endregion
+
+        #region Run
+
+        public string CreateTemporaryDirectory()
+        {
+            string tempFolder = Path.GetTempFileName();
+            File.Delete(tempFolder);
+            Directory.CreateDirectory(tempFolder);
+
+            return tempFolder;
+        }
+
+        static byte[] HexStringToByteArray(string hexString)
+        {
+            var octets = hexString.Split(' ').Select(x => byte.Parse(x, System.Globalization.NumberStyles.HexNumber));
+            return octets.ToArray();
+        }
+
+        public void PatchAndRun(string exePath, string workingDir)
+        {
+            // Create temp dir and copy exe into it
+            string tempDir = CreateTemporaryDirectory();
+            string patchExePath = Path.Combine(tempDir, Path.GetFileName(exePath));
+            File.Copy(exePath, patchExePath);
+
+            // Go through each module's injections and inject the bytes
+            FileStream file = File.Open(patchExePath, FileMode.Open, FileAccess.ReadWrite);
+
+            foreach (var module in moduleList)
+            {
+                if (module.enabled == false)
+                    continue;
+
+                foreach (var injection in module.injectionList)
+                {
+                    file.Position = injection.offset;
+
+                    // Parse search pattern into byte array, and validate
+                    // against what is in the file
+                    byte[] searchArr = HexStringToByteArray(injection.searchPattern);
+                    byte[] checkBytes = new byte[searchArr.Length];
+                    file.Read(checkBytes, 0, searchArr.Length);
+                    if (searchArr.SequenceEqual(checkBytes) == false)
+                    {
+                        throw new System.NotSupportedException("Invalid search bytes in injection.");
+                    }
+
+                    // Rewind file
+                    file.Position = injection.offset;
+
+                    // Prep the patch bytes for this injection by substitution args
+                    string subStr = $"{injection.injectPattern}";
+                    foreach (var arg in module.argList)
+                    {
+                        byte[] valBytes = arg.ValueBytes;
+                        string joined = string.Join(" ", valBytes.Select(x => x.ToString("X2")));
+                        subStr = subStr.Replace($"({arg.name})", joined);
+                    }
+
+                    // Check the resulting patch bytes
+                    byte[] preppedBytes = HexStringToByteArray(subStr);
+                    if (searchArr.Length != preppedBytes.Length)
+                    {
+                        throw new System.NotSupportedException("Byte count has changed after substitution!");
+                    }
+
+                    file.Write(preppedBytes, 0, preppedBytes.Length);
+                }
+            }
+
+            file.Close();
+
+            // Launch the patched EXE
+            var process = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = patchExePath,
+                    WorkingDirectory = workingDir
+                }
+            };
+
+            process.Start();
+            process.WaitForExit();
+
+            // Clean up
+            File.Delete(patchExePath);
+            Directory.Delete(tempDir);
         }
 
         #endregion
