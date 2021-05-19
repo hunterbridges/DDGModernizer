@@ -218,17 +218,24 @@ namespace DDGModernizer
 
         private void button_Go_Click(object sender, EventArgs e)
         {
-            Patcher patcher = new Patcher(currentVersion);
+            try
+            {
+                Patcher patcher = new Patcher(currentVersion);
 
-            patcher.SetModuleEnabled(Patcher.MODULE_KEY_ASPECT, checkBox_AspectEnable.Checked);
-            patcher.SetModuleArg(Patcher.MODULE_KEY_ASPECT, "AspectX", (float)upDown_XAspect.Value);
-            patcher.SetModuleArg(Patcher.MODULE_KEY_ASPECT, "AspectY", (float)upDown_YAspect.Value);
-            patcher.SetModuleArg(Patcher.MODULE_KEY_ASPECT, "WinZoom", (float)upDown_WinZoom.Value);
+                patcher.SetModuleEnabled(Patcher.MODULE_KEY_ASPECT, checkBox_AspectEnable.Checked);
+                patcher.SetModuleArg(Patcher.MODULE_KEY_ASPECT, "AspectX", (float)upDown_XAspect.Value);
+                patcher.SetModuleArg(Patcher.MODULE_KEY_ASPECT, "AspectY", (float)upDown_YAspect.Value);
+                patcher.SetModuleArg(Patcher.MODULE_KEY_ASPECT, "WinZoom", (float)upDown_WinZoom.Value);
 
-            patcher.SetModuleEnabled(Patcher.MODULE_KEY_DRAW_DISTANCE, checkBox_DrawDistEnable.Checked);
-            patcher.SetModuleArg(Patcher.MODULE_KEY_DRAW_DISTANCE, "RendPow", (float)upDown_RendPow.Value);
+                patcher.SetModuleEnabled(Patcher.MODULE_KEY_DRAW_DISTANCE, checkBox_DrawDistEnable.Checked);
+                patcher.SetModuleArg(Patcher.MODULE_KEY_DRAW_DISTANCE, "RendPow", (float)upDown_RendPow.Value);
 
-            patcher.PatchAndRun(textBox_EXEPath.Text, textBox_GameFolder.Text);
+                patcher.PatchAndRun(textBox_EXEPath.Text, textBox_GameFolder.Text);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         #endregion

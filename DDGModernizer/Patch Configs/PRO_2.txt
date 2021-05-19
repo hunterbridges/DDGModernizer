@@ -22,21 +22,32 @@ $19b820, 00 00 20 44 , (WinZoom)
 <OkiDistArg,float,4,0.4>
 <OkiLimit,float,4,660.0>
 <RailLimit,float,4,300.0>
+<SubRailLimit,float,4,350.0>
 <WallLimit,float,4,350.0>
 <DispTrain,float,4,45000.0>
+<FogMin,float,4,32767.0>
+<FogMax,float,4,32767.0>
+
+;Skip SetRendPow Conditions
 $4c16e, 75 1E, EB 6A
 $4c1e6, 83 C4 04, 83 C4 00
+
 $199174, 66 66 66 3F, (RendPow)
 $1990f0, CD CC CC 3E, (OkiDistArg)
+
 ;OkiLimit
 $b3048, 00 00 25 44, (OkiLimit)
+
 ;RailLimit
 $4bd40, D9 05 60 2D 4B 00 , D9 05 84 30 4B 00
 $b3084, 00 00 00 00, (RailLimit)
+
 ;WallLimit/SubRail
 $b3044, 00 00 AF 43, (WallLimit)
+
 ;__disptrain
 $a238c, 00 C8 2F 47, (DispTrain)
-;Fog
-$14ed70, 00 00 7A 43 00 00 48 43 , 00 00 7A 53 00 00 48 53
-$14fafc, 00 00 7A 43 00 00 48 43 , 00 00 7A 53 00 00 48 53
+
+;Disable Fog
+$14ed70, 00 00 7A 43 00 00 48 43 , (FogMax) (FogMin)
+$14fafc, 00 00 7A 43 00 00 48 43 , (FogMax) (FogMin)

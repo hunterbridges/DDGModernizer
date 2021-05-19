@@ -1,1 +1,31 @@
-﻿
+﻿[DrawDistance]
+<RendPow,float,4,0.5625>
+<OkiLimit,float,4,660.0>
+<RailLimit,float,4,300.0>
+<SubRailLimit,float,4,350.0>
+<WallLimit,float,4,350.0>
+<FogMin,float,4,32767.0>
+<FogMax,float,4,32767.0>
+
+;Inject RendPow Arg
+$dfbf, C7 05 08 62 4E 00 00 00 10 3F, C7 05 08 62 4E 00 (RendPow)
+$ca410, 9A 99 59 3F, (RendPow)
+$e6208, 66 66 66 3F, (RendPow)
+
+;OkiLimit
+;$ca3f8, 00 00 FA 43, (OkiLimit)
+;$ca3f0, 00 00 7A 43, (OkiLimit)
+
+;RailLimit
+;$ca3f0, 00 00 AF 43, (RailLimit)
+
+;SubRailLimit
+;$ca3d8, 00 00 96 43, (SubRailLimit)
+;$ca3ec, 00 00 48 43, (SubRailLimit)
+
+;WallLimit
+;$ca3fc, 00 80 14 44, (WallLimit)
+;$ca400, 00 00 25 44, (WallLimit)
+
+;Disable Fog
+$1b0198, 00 00 7A 43 00 00 48 43 , (FogMax) (FogMin)
