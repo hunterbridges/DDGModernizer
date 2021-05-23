@@ -61,7 +61,23 @@ namespace DDGModernizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to [DrawDistance]
+        ///&lt;RendPow,float,4,0.6&gt;
+        ///&lt;OkiDistArg,float,4,0.4&gt;
+        ///$1DB0F4, CD CC CC 3E , (OkiDistArg)
+        ///$1DB0F8, 66 66 66 3F , (RendPow)
+        ///$C6ED4, 00 00 00 00 , (RendPow)
+        ///;Fix magnification
+        ///$7E504, D9 1D F8 B0 5D 00 , 6A 00 EB 0C 90 90
+        ///$7E50F, E8 EC D3 FF FF , EB 03 90 90 90
+        ///;Fix for outer view
+        ///$23621, 74 6F , EB 6F
+        ///
+        ///[Aspect]
+        ///&lt;AspectX,float,4,1.0&gt;
+        ///&lt;AspectY,float,4,0.5&gt;
+        ///$178EB, 68 00 00 00 3F 68 00 00 80 3F , 68 (AspectY) 68 (AspectX)
+        ///$17A5F, 68 00 00 00 3F 68 00 00 80 3F , 68 (AspectY) 68 (AspectX)        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string FINAL {
             get {
@@ -70,19 +86,33 @@ namespace DDGModernizer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon Icon1 {
+            get {
+                object obj = ResourceManager.GetObject("Icon1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [Aspect]
-        ///&lt;AspectX,float,4,1.0f&gt;
-        ///&lt;AspectY,float,4,1.0f&gt;
-        ///&lt;WinZoom,float,4,640.0f&gt;
+        ///&lt;AspectX,float,4,1.0&gt;
+        ///&lt;AspectY,float,4,1.0&gt;
+        ///&lt;WinZoom,float,4,640.0&gt;
+        ///;ExecViewCom
         ///$13a46, 68 00 00 00 3F 68 00 00 80 3F , 68 (AspectY) 68 (AspectX)
-        ///$58a48, 68 00 00 00 3F 68 00 00 80 3F , 68 (AspectY) 68 (AspectX)
+        ///;WinInit
+        ///$5a690, 68 00 00 20 44 , 68 (WinZoom)
         ///$5a69b, 68 00 00 00 3F 68 00 00 80 3F , 68 (AspectY) 68 (AspectX)
+        ///;WinAlloc
+        ///$5a814, 68 00 00 20 44 , 68 (WinZoom)
         ///$5a81f, 68 00 00 00 3F 68 00 00 80 3F , 68 (AspectY) 68 (AspectX)
+        ///;Other
         ///$5c247, A3 F0 B7 59 00 , EB 14 90 90 90
         ///$19b7f0, 00 00 20 44 , (WinZoom)
         ///$19b800, 00 00 20 44 , (WinZoom)
-        ///$19b810, 00 00 20 44 , (WinZoom)
-        ///$19b820, 00 00 20 [rest of string was truncated]&quot;;.
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string PRO_2 {
             get {
@@ -91,7 +121,27 @@ namespace DDGModernizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to [Aspect]
+        ///&lt;AspectX,float,4,1.0&gt;
+        ///&lt;AspectY,float,4,1.0&gt;
+        ///&lt;AspectRatio,float,4,1.0&gt;
+        ///&lt;WinZoom,float,4,640.0&gt;
+        ///;WinProjection
+        ///$d385, 68 00 00 80 3F, 68 (AspectX)
+        ///$d3b1, 68 CD CC 4C 3F, 68 (AspectX)
+        ///$807b9, 68 00 00 80 3F, 68 (AspectX)
+        ///$9b39f, 68 00 00 80 3F, 68 (AspectX)
+        ///
+        ///;WinAspect
+        ///;$3e06, C7 44 24 00 00 00 80 3F, C7 44 24 00 (AspectX)
+        ///;$807c4, 68 6e db b6 3f, 68 (AspectX)
+        ///;$9b3aa, 68 6e db b6 3f, 68 (AspectX)
+        ///
+        ///;Aspect
+        ///$ca350, 6e db b6 3f, (AspectRatio)
+        ///
+        ///[DrawDistance]
+        ///&lt;RendPow,float,4,0.5625&gt;        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SHINKANSEN {
             get {

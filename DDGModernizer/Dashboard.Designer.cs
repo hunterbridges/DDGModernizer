@@ -29,6 +29,7 @@ namespace DDGModernizer
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button_GameFolderBrowse = new System.Windows.Forms.Button();
@@ -494,6 +495,7 @@ namespace DDGModernizer
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(368, 390);
             this.MinimumSize = new System.Drawing.Size(368, 390);
             this.Name = "Dashboard";
