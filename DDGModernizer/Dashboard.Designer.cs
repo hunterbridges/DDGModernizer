@@ -411,7 +411,7 @@ namespace DDGModernizer
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(136, 23);
             this.label14.TabIndex = 26;
-            this.label14.Text = "(Smaller = Farther)";
+            this.label14.Text = "(Bigger = Farther)";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label13
