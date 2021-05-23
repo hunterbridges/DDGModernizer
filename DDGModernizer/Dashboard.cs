@@ -225,6 +225,7 @@ namespace DDGModernizer
                 patcher.SetModuleEnabled(Patcher.MODULE_KEY_ASPECT, checkBox_AspectEnable.Checked);
                 patcher.SetModuleArg(Patcher.MODULE_KEY_ASPECT, "AspectX", (float)upDown_XAspect.Value);
                 patcher.SetModuleArg(Patcher.MODULE_KEY_ASPECT, "AspectY", (float)upDown_YAspect.Value);
+                patcher.SetModuleArg(Patcher.MODULE_KEY_ASPECT, "AspectRatio", (float)upDown_WinX.Value / (float)upDown_WinY.Value);
                 patcher.SetModuleArg(Patcher.MODULE_KEY_ASPECT, "WinZoom", (float)upDown_WinZoom.Value);
 
                 patcher.SetModuleEnabled(Patcher.MODULE_KEY_DRAW_DISTANCE, checkBox_DrawDistEnable.Checked);

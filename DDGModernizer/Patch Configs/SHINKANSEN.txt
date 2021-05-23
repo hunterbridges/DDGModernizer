@@ -1,4 +1,23 @@
-﻿[DrawDistance]
+﻿[Aspect]
+<AspectX,float,4,1.0>
+<AspectY,float,4,1.0>
+<AspectRatio,float,4,1.0>
+<WinZoom,float,4,640.0>
+;WinProjection
+$d385, 68 00 00 80 3F, 68 (AspectX)
+$d3b1, 68 CD CC 4C 3F, 68 (AspectX)
+$807b9, 68 00 00 80 3F, 68 (AspectX)
+$9b39f, 68 00 00 80 3F, 68 (AspectX)
+
+;WinAspect
+;$3e06, C7 44 24 00 00 00 80 3F, C7 44 24 00 (AspectX)
+;$807c4, 68 6e db b6 3f, 68 (AspectX)
+;$9b3aa, 68 6e db b6 3f, 68 (AspectX)
+
+;Aspect
+$ca350, 6e db b6 3f, (AspectRatio)
+
+[DrawDistance]
 <RendPow,float,4,0.5625>
 <OkiLimit,float,4,660.0>
 <RailLimit,float,4,300.0>

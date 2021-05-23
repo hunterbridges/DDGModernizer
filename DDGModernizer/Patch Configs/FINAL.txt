@@ -1,1 +1,25 @@
-﻿
+﻿[DrawDistance]
+<RendPow,float,4,0.6>
+<OkiDistArg,float,4,0.4>
+$1DB0F4, CD CC CC 3E , (OkiDistArg)
+$1DB0F8, 66 66 66 3F , (RendPow)
+$C6ED4, 00 00 00 00 , (RendPow)
+;Fix magnification
+$7E504, D9 1D F8 B0 5D 00 , 6A 00 EB 0C 90 90
+$7E50F, E8 EC D3 FF FF , EB 03 90 90 90
+;Fix for outer view
+$23621, 74 6F , EB 6F
+
+[Aspect]
+<AspectX,float,4,1.0>
+<AspectY,float,4,0.5>
+$178EB, 68 00 00 00 3F 68 00 00 80 3F , 68 (AspectY) 68 (AspectX)
+$17A5F, 68 00 00 00 3F 68 00 00 80 3F , 68 (AspectY) 68 (AspectX)
+$82E08, 68 00 00 00 3F 68 00 00 80 3F , 68 (AspectY) 68 (AspectX)
+$8308E, 68 00 00 00 3F 68 00 00 80 3F , 68 (AspectY) 68 (AspectX)
+;Fix processing
+$47112, C7 44 24 04 00 00 80 3F , C7 44 24 04 (AspectX)
+$4711A, 75 09 , EB 13
+$4713A, D9 1C 24 , EB E9 90
+$47125, D9 44 24 04 D8 0D A0 23 4B 00 , C7 04 24 (AspectY) EB 0F 90
+
