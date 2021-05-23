@@ -273,8 +273,6 @@ namespace DDGModernizer
             {
                 return false;
             }
-
-            return false;
         }
 
         private void Aspect_AutoCalculate(DDGVersion version)
