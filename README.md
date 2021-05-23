@@ -23,7 +23,7 @@ the
 
 The application presents a simple dashboard UI:
 
-![image](https://user-images.githubusercontent.com/775593/119245170-fb5b8900-bb2b-11eb-9590-d8b88a3e42ac.png)
+![image](https://user-images.githubusercontent.com/775593/119245653-c05b5480-bb2f-11eb-9540-54eeb17b4095.png)
 
 First, select the game you wish to play from the dropdown. The program will attempt to locate the game EXE and game folder in the default locations. If it does not work, point the "EXE Path" to your game EXE, and the "Game Folder" to the game data folder (generally the folder which contains the EXE).
 
