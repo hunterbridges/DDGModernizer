@@ -34,4 +34,5 @@ Next, you can choose which patches to enable. For the aspect ratio patch, the to
 Thanks to the Unofficial Densha de GO!! discord for various tips and resources.
 
 Thanks to @autotraintas for creating the [Auto Train TAS tool](http://autotraintas.hariko.com/)
+
 Thanks to zarala for creating [dengo_tools](http://zarala.g2.xrea.com/soft/dengo_tools.zip), from which I derived the patch format
