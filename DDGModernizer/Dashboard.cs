@@ -18,7 +18,7 @@ namespace DDGModernizer
 
         DDGVersion currentVersion = DDGVersion.UNKNOWN;
 
-        Dictionary<DDGVersion, string> regPaths = new Dictionary<DDGVersion, string>();
+        Dictionary<DDGVersion, List<string>> regPaths = new Dictionary<DDGVersion, List<string>>();
 
         public Dashboard()
         {
@@ -33,11 +33,17 @@ namespace DDGModernizer
 
         void ConfigRegPaths()
         {
-            // Legacy windows charset fun...
+            regPaths[DDGVersion.PRO_2] = new List<string>();
+            regPaths[DDGVersion.PRO_2].Add("Software\\TAITO\\電車でＧＯ！プロフェッショナル２");
+            regPaths[DDGVersion.PRO_2].Add("Software\\TAITO\\�d�Ԃłf�n�I�v���t�F�b�V���i���Q");
 
-            regPaths[DDGVersion.PRO_2] = "Software\\TAITO\\�d�Ԃłf�n�I�v���t�F�b�V���i���Q";
-            regPaths[DDGVersion.SHINKANSEN] = "Software\\TAITO\\�d�Ԃłf�n�I�V���� �R�z�V������";
-            regPaths[DDGVersion.FINAL] = "Software\\TAITO\\�d�Ԃłf�n�I�e�h�m�`�k";
+            regPaths[DDGVersion.SHINKANSEN] = new List<string>();
+            regPaths[DDGVersion.SHINKANSEN].Add("Software\\TAITO\\電車でＧＯ！新幹線 山陽新幹線編");
+            regPaths[DDGVersion.SHINKANSEN].Add("Software\\TAITO\\�d�Ԃłf�n�I�V���� �R�z�V������");
+
+            regPaths[DDGVersion.FINAL] = new List<string>();
+            regPaths[DDGVersion.FINAL].Add("Software\\TAITO\\電車でＧＯ！プロフェッショナル２");
+            regPaths[DDGVersion.FINAL].Add("Software\\TAITO\\�d�Ԃłf�n�I�e�h�m�`�k");
         }
 
         bool IsVersionSupported(DDGVersion version)
@@ -168,6 +174,7 @@ namespace DDGModernizer
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     filePath = openFileDialog.FileName;
+                    ValidateGoButton();
                 }
             }
 
@@ -191,6 +198,7 @@ namespace DDGModernizer
                 if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
                     filePath = folderBrowserDialog.SelectedPath;
+                    ValidateGoButton();
                 }
             }
 
@@ -239,6 +247,16 @@ namespace DDGModernizer
             }
         }
 
+        private void textBox_EXEPath_TextChanged(object sender, EventArgs e)
+        {
+            ValidateGoButton();
+        }
+
+        private void textBox_GameFolder_TextChanged(object sender, EventArgs e)
+        {
+            ValidateGoButton();
+        }
+
         #endregion
 
         #region Aspect Ratio
@@ -248,31 +266,36 @@ namespace DDGModernizer
             if (regPaths.ContainsKey(version) == false)
                 return false;
 
-            string regKey = regPaths[version];
+            var regKeys = regPaths[version];
             try
             {
-                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(regKey))
+                foreach (var regKey in regKeys)
                 {
-                    if (key == null)
-                        return false;
+                    using (RegistryKey key = Registry.CurrentUser.OpenSubKey(regKey))
+                    {
+                        if (key == null)
+                            return false;
 
-                    var names = key.GetValueNames();
-                    object scrwidth = key.GetValue("scrwidth");
-                    object scrheight = key.GetValue("scrheight");
+                        var names = key.GetValueNames();
+                        object scrwidth = key.GetValue("scrwidth");
+                        object scrheight = key.GetValue("scrheight");
 
-                    if (scrwidth != null)
-                        upDown_WinX.Value = Convert.ToInt32(scrwidth);
+                        if (scrwidth != null)
+                            upDown_WinX.Value = Convert.ToInt32(scrwidth);
 
-                    if (scrheight != null)
-                        upDown_WinY.Value = Convert.ToInt32(scrheight);
+                        if (scrheight != null)
+                            upDown_WinY.Value = Convert.ToInt32(scrheight);
 
-                    return true;
+                        return true;
+                    }
                 }
             }
             catch 
             {
                 return false;
             }
+
+            return false;
         }
 
         private void Aspect_AutoCalculate(DDGVersion version)
@@ -382,6 +405,5 @@ namespace DDGModernizer
         }
 
         #endregion
-
     }
 }

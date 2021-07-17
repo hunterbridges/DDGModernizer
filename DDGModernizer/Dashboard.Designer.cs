@@ -117,6 +117,7 @@ namespace DDGModernizer
             this.textBox_GameFolder.Name = "textBox_GameFolder";
             this.textBox_GameFolder.Size = new System.Drawing.Size(147, 20);
             this.textBox_GameFolder.TabIndex = 6;
+            this.textBox_GameFolder.TextChanged += new System.EventHandler(this.textBox_GameFolder_TextChanged);
             // 
             // button_EXEPathBrowse
             // 
@@ -134,6 +135,7 @@ namespace DDGModernizer
             this.textBox_EXEPath.Name = "textBox_EXEPath";
             this.textBox_EXEPath.Size = new System.Drawing.Size(147, 20);
             this.textBox_EXEPath.TabIndex = 4;
+            this.textBox_EXEPath.TextChanged += new System.EventHandler(this.textBox_EXEPath_TextChanged);
             // 
             // label4
             // 
