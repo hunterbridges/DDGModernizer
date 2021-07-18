@@ -36,14 +36,17 @@ namespace DDGModernizer
             regPaths[DDGVersion.PRO_2] = new List<string>();
             regPaths[DDGVersion.PRO_2].Add("Software\\TAITO\\電車でＧＯ！プロフェッショナル２");
             regPaths[DDGVersion.PRO_2].Add("Software\\TAITO\\�d�Ԃłf�n�I�v���t�F�b�V���i���Q");
+            regPaths[DDGVersion.PRO_2].Add("Software\\TAITO\\“dŽÔ‚Å‚f‚n\x81Iƒvƒ\x8dƒtƒFƒbƒVƒ‡ƒiƒ‹‚Q");
 
             regPaths[DDGVersion.SHINKANSEN] = new List<string>();
             regPaths[DDGVersion.SHINKANSEN].Add("Software\\TAITO\\電車でＧＯ！新幹線 山陽新幹線編");
             regPaths[DDGVersion.SHINKANSEN].Add("Software\\TAITO\\�d�Ԃłf�n�I�V���� �R�z�V������");
+            regPaths[DDGVersion.SHINKANSEN].Add("Software\\TAITO\\“dŽÔ‚Å‚f‚n\x81I\x90VŠ²\x90ü ŽR—z\x90VŠ²\x90ü•Ò");
 
             regPaths[DDGVersion.FINAL] = new List<string>();
             regPaths[DDGVersion.FINAL].Add("Software\\TAITO\\電車でＧＯ！プロフェッショナル２");
             regPaths[DDGVersion.FINAL].Add("Software\\TAITO\\�d�Ԃłf�n�I�e�h�m�`�k");
+            regPaths[DDGVersion.FINAL].Add("Software\\TAITO\\“dŽÔ‚Å‚f‚n\x81I‚e‚h‚m‚`‚k");
         }
 
         bool IsVersionSupported(DDGVersion version)
