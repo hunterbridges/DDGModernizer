@@ -142,6 +142,7 @@ namespace DDGModernizer
 
         public const string MODULE_KEY_ASPECT = "Aspect";
         public const string MODULE_KEY_DRAW_DISTANCE = "DrawDistance";
+        public const string MODULE_KEY_BORDERLESS = "Borderless";
 
         public static Regex REGEX_MODULE_NAME = new Regex(@"\[([A-Za-z0-9_ ]+)\]");
         public static Regex REGEX_ARG_DECL = new Regex(@"<(?<ArgName>[A-Za-z0-9-_]+),(?<ArgType>float|dec|str),(?<ArgSize>\d+),(?<DefaultVal>[^,>]+)(?:,(?<Comment>[^,>]+))?>");

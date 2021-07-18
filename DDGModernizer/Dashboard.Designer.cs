@@ -62,6 +62,9 @@ namespace DDGModernizer
             this.trackBar_RendPow = new System.Windows.Forms.TrackBar();
             this.checkBox_DrawDistEnable = new System.Windows.Forms.CheckBox();
             this.button_Go = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.checkBox_Borderless = new System.Windows.Forms.CheckBox();
+            this.button_GameConfig = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.upDown_WinZoom)).BeginInit();
@@ -72,6 +75,7 @@ namespace DDGModernizer
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.upDown_RendPow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_RendPow)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -479,7 +483,7 @@ namespace DDGModernizer
             // button_Go
             // 
             this.button_Go.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_Go.Location = new System.Drawing.Point(184, 290);
+            this.button_Go.Location = new System.Drawing.Point(184, 345);
             this.button_Go.Name = "button_Go";
             this.button_Go.Size = new System.Drawing.Size(156, 49);
             this.button_Go.TabIndex = 25;
@@ -487,19 +491,53 @@ namespace DDGModernizer
             this.button_Go.UseVisualStyleBackColor = true;
             this.button_Go.Click += new System.EventHandler(this.button_Go_Click);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.checkBox_Borderless);
+            this.groupBox4.Location = new System.Drawing.Point(184, 291);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(156, 48);
+            this.groupBox4.TabIndex = 26;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Window";
+            // 
+            // checkBox_Borderless
+            // 
+            this.checkBox_Borderless.Checked = true;
+            this.checkBox_Borderless.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_Borderless.Location = new System.Drawing.Point(6, 19);
+            this.checkBox_Borderless.Name = "checkBox_Borderless";
+            this.checkBox_Borderless.Size = new System.Drawing.Size(144, 23);
+            this.checkBox_Borderless.TabIndex = 0;
+            this.checkBox_Borderless.Text = "Borderless Window";
+            this.checkBox_Borderless.UseVisualStyleBackColor = true;
+            // 
+            // button_GameConfig
+            // 
+            this.button_GameConfig.Enabled = false;
+            this.button_GameConfig.Location = new System.Drawing.Point(13, 371);
+            this.button_GameConfig.Name = "button_GameConfig";
+            this.button_GameConfig.Size = new System.Drawing.Size(157, 23);
+            this.button_GameConfig.TabIndex = 27;
+            this.button_GameConfig.Text = "Game Config";
+            this.button_GameConfig.UseVisualStyleBackColor = true;
+            this.button_GameConfig.Click += new System.EventHandler(this.button_GameConfig_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(352, 351);
+            this.ClientSize = new System.Drawing.Size(352, 401);
+            this.Controls.Add(this.button_GameConfig);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.button_Go);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(368, 390);
-            this.MinimumSize = new System.Drawing.Size(368, 390);
+            this.MaximumSize = new System.Drawing.Size(368, 440);
+            this.MinimumSize = new System.Drawing.Size(368, 440);
             this.Name = "Dashboard";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -515,6 +553,7 @@ namespace DDGModernizer
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.upDown_RendPow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_RendPow)).EndInit();
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -554,6 +593,9 @@ namespace DDGModernizer
         private System.Windows.Forms.TrackBar trackBar_RendPow;
         private System.Windows.Forms.CheckBox checkBox_DrawDistEnable;
         private System.Windows.Forms.Button button_Go;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.CheckBox checkBox_Borderless;
+        private System.Windows.Forms.Button button_GameConfig;
     }
 }
 

@@ -23,3 +23,6 @@ $4711A, 75 09 , EB 13
 $4713A, D9 1C 24 , EB E9 90
 $47125, D9 44 24 04 D8 0D A0 23 4B 00 , C7 04 24 (AspectY) EB 0F 90
 
+[Borderless]
+;Change CreateWindowExA dwStyle
+$70c2, 00 00 cf 00, 00 00 00 90

@@ -222,6 +222,10 @@ namespace DDGModernizer
             enabled &= Directory.Exists(textBox_GameFolder.Text);
 
             button_Go.Enabled = enabled;
+
+            button_GameConfig.Enabled = Directory.Exists(textBox_GameFolder.Text);
+
+            checkBox_Borderless.Enabled = (currentVersion == DDGVersion.PRO_2 || currentVersion == DDGVersion.FINAL);
         }
 
         private void button_Go_Click(object sender, EventArgs e)
@@ -238,6 +242,8 @@ namespace DDGModernizer
 
                 patcher.SetModuleEnabled(Patcher.MODULE_KEY_DRAW_DISTANCE, checkBox_DrawDistEnable.Checked);
                 patcher.SetModuleArg(Patcher.MODULE_KEY_DRAW_DISTANCE, "RendPow", (float)upDown_RendPow.Value);
+
+                patcher.SetModuleEnabled(Patcher.MODULE_KEY_BORDERLESS, checkBox_Borderless.Checked);
 
                 patcher.PatchAndRun(textBox_EXEPath.Text, textBox_GameFolder.Text);
             }
@@ -267,14 +273,14 @@ namespace DDGModernizer
                 return false;
 
             var regKeys = regPaths[version];
-            try
+            foreach (var regKey in regKeys)
             {
-                foreach (var regKey in regKeys)
+                try
                 {
                     using (RegistryKey key = Registry.CurrentUser.OpenSubKey(regKey))
                     {
                         if (key == null)
-                            return false;
+                            continue;
 
                         var names = key.GetValueNames();
                         object scrwidth = key.GetValue("scrwidth");
@@ -289,10 +295,10 @@ namespace DDGModernizer
                         return true;
                     }
                 }
-            }
-            catch 
-            {
-                return false;
+                catch 
+                {
+                    continue;
+                }
             }
 
             return false;
@@ -402,6 +408,44 @@ namespace DDGModernizer
             upDown_RendPow.Enabled = checkBox.Checked;
             trackBar_RendPow.Enabled = checkBox.Checked;
             button_RendPowDefault.Enabled = checkBox.Checked;
+        }
+
+        #endregion
+
+        #region Game Config Button
+
+        private void button_GameConfig_Click(object sender, EventArgs e)
+        {
+            string path = null;
+            switch (currentVersion)
+            {
+                case DDGVersion.FINAL:
+                    path = Path.Combine(textBox_GameFolder.Text, "dgfncal.exe");
+                    break;
+
+                case DDGVersion.PRO_2:
+                    path = Path.Combine(textBox_GameFolder.Text, "dgp2cal.exe");
+                    break;
+
+                case DDGVersion.SHINKANSEN:
+                    path = Path.Combine(textBox_GameFolder.Text, "dgoscal.exe");
+                    break;
+
+                default:
+                    break;
+            }
+
+            if (path == null)
+                return;
+
+            try
+            {
+                System.Diagnostics.Process.Start(path);
+            }
+            catch
+            {
+                // Do nothing
+            }
         }
 
         #endregion
